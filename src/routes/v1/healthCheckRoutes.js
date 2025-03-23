@@ -1,5 +1,5 @@
 import express from "express";
-import APIController from "../controllers/apiController.js";
+import HealthCheckController from "../../controllers/healthCheckController.js";
 
 const router = express.Router();
 
@@ -31,6 +31,6 @@ const router = express.Router();
  *         $ref: "#/components/responses/ServerError"
  */
 
-router.get("/info", (req, res) => APIController.getInfo(req, res));
+router.get("/", (req, res) => HealthCheckController.gethealthInfo(req, res));
 
 export default router;
