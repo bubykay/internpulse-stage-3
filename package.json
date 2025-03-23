@@ -1,5 +1,5 @@
 {
-  "name": "hng-tasks-template",
+  "name": "hpayment-processing-api-internpulse",
   "version": "1.0.0",
   "description": "Interpulse Week 3 task",
   "main": "index.js",
@@ -18,13 +18,15 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "flutterwave-node-v3": "^1.1.15",
+    "joi": "^17.13.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "winston": "^3.17.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
     "jest": "^29.7.0",
     "nodemon": "^3.1.9",
-    "supertest": "^7.0.0"
+    "supertest": "^7.1.0"
   }
 }
