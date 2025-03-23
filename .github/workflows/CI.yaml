@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [staging]
 
 jobs:
   build:
@@ -15,14 +15,24 @@ jobs:
         node-version: [18.x, 20.x] # Use latest LTS versions
 
     steps:
-      - uses: actions/checkout@v4 # Latest version
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout Repository
+        uses: actions/checkout@v4 # Latest version
+
+      - name: Load Environment Variables
+        run: |
+          if [ -f .env.test ]; then cp .env.test .env; else echo "Skipping .env copy, .env.test not found"; fi
+
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn" # Cache Yarn dependencies
-      - run: |
-          set -e  # Stop on first failure
-          yarn install --frozen-lockfile  # Ensures dependencies match yarn.lock
-          yarn build || echo "No build script found, skipping..."
-          yarn test --detectOpenHandles  # Detect Jest leaks
+          cache: "yarn" # Cache Yarn dependencies for faster builds
+
+      - name: Install Dependencies
+        run: yarn install --frozen-lockfile # Ensures consistency
+
+      - name: Build Application
+        run: yarn build || echo "No build script found, skipping..."
+
+      - name: Run Tests
+        run: yarn test --runInBand --detectOpenHandles --ci
