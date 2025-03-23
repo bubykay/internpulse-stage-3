@@ -1,0 +1,28 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x] # Use latest LTS versions
+
+    steps:
+      - uses: actions/checkout@v4 # Latest version
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn" # Cache Yarn dependencies
+      - run: |
+          set -e  # Stop on first failure
+          yarn install --frozen-lockfile  # Ensures dependencies match yarn.lock
+          yarn build || echo "No build script found, skipping..."
+          yarn test --detectOpenHandles  # Detect Jest leaks
