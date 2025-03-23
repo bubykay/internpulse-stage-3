@@ -1,6 +1,7 @@
 import Fluttwewave from "flutterwave-node-v3";
 import crypto from "crypto";
 import env from "../../config/env.js";
+import { handleFlutterwaveProviderException } from "../../utils/index.js";
 class FlutterwaveProvider {
   #flutterwave;
   constructor() {
@@ -9,7 +10,6 @@ class FlutterwaveProvider {
       env.providers.flutterwave.secretKey
     );
   }
-  // other methods
 
   initiateCardPayment = async (data) => {
     try {
@@ -31,18 +31,18 @@ class FlutterwaveProvider {
       });
       return response;
     } catch (error) {
-      throw error;
+      return handleFlutterwaveProviderException(error);
     }
   };
 
   verifyPayment = async (tx_ref) => {
     try {
       const response = await this.#flutterwave.Transaction.verify({
-        id: tx_ref,
+        id: parseInt(tx_ref),
       });
       return response;
     } catch (error) {
-      throw error;
+      return handleFlutterwaveProviderException(error);
     }
   };
 
@@ -54,7 +54,7 @@ class FlutterwaveProvider {
       });
       return response;
     } catch (error) {
-      throw error;
+      return handleFlutterwaveProviderException(error);
     }
   };
 }

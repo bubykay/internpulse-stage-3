@@ -14,7 +14,7 @@ class PaymentService {
   }
   async verifyPayment(tx_ref) {
     try {
-      const payment = await this.paymentGateway.verifyPayment({ id: tx_ref });
+      const payment = await this.paymentGateway.verifyPayment(tx_ref);
       return payment;
     } catch (error) {
       throw error;

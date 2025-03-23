@@ -4,6 +4,12 @@ export default (err, req, res, next) => {
   const message = err.message || "Internal Server Error";
 
   // Send error response with status code and message
+  if (statusCode === 500) {
+    return res.status(statusCode).json({
+      message: "Internal Server Error",
+      status: statusCode,
+    });
+  }
   res.status(statusCode).json({
     message: message,
     status: statusCode,
