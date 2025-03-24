@@ -27,6 +27,7 @@ const router = express.Router();
  *                   type: string
  *                   example: "https://github.com/yourusername"
  *       500:
+ *
  *         $ref: "#/components/responses/ServerError"
  */
 
