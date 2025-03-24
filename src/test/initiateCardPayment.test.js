@@ -1,6 +1,5 @@
 import request from "supertest";
-import app from "../app"; // ✅ Correct ES Module import
-import paymentRoutes from "../routes/v1/paymentRoutes";
+import app from "../app";
 import PaymentController from "../controllers/PaymentController";
 
 describe("POST /api/v1/payment/initiate", () => {
