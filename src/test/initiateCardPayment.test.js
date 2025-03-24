@@ -2,10 +2,10 @@ import request from "supertest";
 import app from "../app";
 import PaymentController from "../controllers/PaymentController";
 
-describe("POST /api/v1/payment/initiate", () => {
+describe("POST /api/v1/payment", () => {
   it("should return 400 if email is missing in the request body", async () => {
     const response = await request(app)
-      .post("/api/v1/payment/initiate")
+      .post("/api/v1/payment")
       .send({ amount: 1000 });
 
     expect(response.status).toBe(400);
@@ -13,7 +13,7 @@ describe("POST /api/v1/payment/initiate", () => {
   });
   it("should return 400 if amount is missing in the request body", async () => {
     const response = await request(app)
-      .post("/api/v1/payment/initiate")
+      .post("/api/v1/payment")
       .send({ email: "test@example.com" });
 
     expect(response.status).toBe(400);
@@ -22,7 +22,7 @@ describe("POST /api/v1/payment/initiate", () => {
 
   it("should return 400 if email is invalid", async () => {
     const response = await request(app)
-      .post("/api/v1/payment/initiate")
+      .post("/api/v1/payment")
       .send({ email: "invalid-email", amount: 1000 });
 
     expect(response.status).toBe(400);
@@ -31,7 +31,7 @@ describe("POST /api/v1/payment/initiate", () => {
 
   it("should return 200 and initiate payment if request body is valid", async () => {
     const response = await request(app)
-      .post("/api/v1/payment/initiate")
+      .post("/api/v1/payment")
       .send({ email: "test@example.com", amount: 1000 });
 
     expect(response.status).toBe(200);
@@ -48,7 +48,7 @@ describe("POST /api/v1/payment/initiate", () => {
       });
 
     const response = await request(app)
-      .post("/api/v1/payment/initiate")
+      .post("/api/v1/payment")
       .send({ email: "test@example.com", amount: 1000 });
 
     expect(response.status).toBe(500);
