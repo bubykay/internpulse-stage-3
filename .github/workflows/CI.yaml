@@ -35,4 +35,4 @@ jobs:
         run: yarn build || echo "No build script found, skipping..."
 
       - name: Run Tests
-        run: yarn test --runInBand --detectOpenHandles --ci
+        run: yarn test -ci
