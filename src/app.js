@@ -4,7 +4,7 @@ import errorHandler from "./middlewares/errorHandlers.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./utils/swaggerConfig.js";
 import responseMiddleware from "./middlewares/responseMiddleware.js";
-import healthCheckRoutes from "./routes/v1/healthCheckRoutes.js";
+// import healthCheckRoutes from "./routes/v1/healthCheckRoutes.js";
 import paymentRoutes from "./routes/v1/paymentRoutes.js";
 
 class App {
@@ -22,7 +22,7 @@ class App {
   }
 
   routes() {
-    this.app.use("/health", healthCheckRoutes);
+    // this.app.use("/health", healthCheckRoutes);
     this.app.use("/api/v1/payment", paymentRoutes);
     this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
