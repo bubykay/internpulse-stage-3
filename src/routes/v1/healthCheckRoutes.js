@@ -1,5 +1,5 @@
 import express from "express";
-import healthCheckController from "../../controllers/healthCheckController.js";
+import healthController from "../../controllers/healthController.js";
 
 const router = express.Router();
 
@@ -31,6 +31,6 @@ const router = express.Router();
  *         $ref: "#/components/responses/ServerError"
  */
 
-router.get("/", (req, res) => healthCheckController.gethealthInfo(req, res));
+router.get("/", (req, res) => healthController.gethealthInfo(req, res));
 
 export default router;
