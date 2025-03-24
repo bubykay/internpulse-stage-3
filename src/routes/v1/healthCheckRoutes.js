@@ -1,8 +1,7 @@
 import express from "express";
-import HealthCheckController from "../../controllers/healthCheckController.js";
+import healthController from "../../controllers/healthController.js";
 
 const router = express.Router();
-
 
 /**
  * @swagger
@@ -28,9 +27,10 @@ const router = express.Router();
  *                   type: string
  *                   example: "https://github.com/yourusername"
  *       500:
+ *
  *         $ref: "#/components/responses/ServerError"
  */
 
-router.get("/", (req, res) => HealthCheckController.gethealthInfo(req, res));
+router.get("/", (req, res) => healthController.gethealthInfo(req, res));
 
 export default router;
